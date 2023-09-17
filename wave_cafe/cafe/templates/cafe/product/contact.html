@@ -1,0 +1,34 @@
+{% extends "cafe/base.html" %}
+{% load static %}
+
+{% block title %}Contact{% endblock %}
+
+{% block content %}
+<!-- Contact Page -->
+  <div id="contact" class="tm-page-content">{% for c in contact %}
+    <div class="tm-black-bg tm-contact-text-container">
+      <h2 class="tm-text-primary">{{ c.name }}</h2>
+      <p>{{ c.description|linebreaks }}</p>
+    </div>{% endfor %}
+    <div class="tm-black-bg tm-contact-form-container tm-align-right">
+      <form action="" method="POST" id="contact-form">
+        <div class="tm-form-group">
+          <input type="text" name="name" class="tm-form-control" placeholder="Имя" required="" />
+        </div>
+        <div class="tm-form-group">
+          <input type="email" name="email" class="tm-form-control" placeholder="Email" required="" />
+        </div>
+        <div class="tm-form-group tm-mb-30">
+          <textarea rows="6" name="message" class="tm-form-control" placeholder="Ваше сообщение" required=""></textarea>
+        </div>
+        <div>
+          {% csrf_token %}
+          <button type="submit" class="tm-btn-primary tm-align-right">
+            Отправить
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+{% endblock %}
+          <!-- end Contact Page -->

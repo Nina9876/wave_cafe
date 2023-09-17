@@ -1,0 +1,31 @@
+{% extends "cafe/base.html" %}
+{% load static %}
+
+{% block title %}Меню напитков{% endblock %}
+
+{% block content %}
+  <div class="tm-page-content">
+    <!-- Drink Menu Page -->
+    <nav class="tm-black-bg tm-drinks-nav">
+      <ul>{% for c in categories %}
+        <li {% if category.slug == c.slug %} class="tm-tab-link active" {% endif %}>
+          <a href="{{ c.get_absolute_url }}">{{ c.name }}</a></li>
+        {% endfor %}
+      </ul>
+    </nav></nav>
+    {% for product in products %}
+    <div class="tm-tab-content">
+      <div class="tm-list">
+        <div class="tm-list-item">
+          <img src="{{ product.image.url }}" alt="Image" class="tm-list-item-img">
+          <div class="tm-black-bg tm-list-item-text">
+            <h3 class="tm-list-item-name">{{ product.name }}<span class="tm-list-item-price">{{ product.price }}p.</span></h3>
+            <p class="tm-list-item-description">{{ product.description }}</p>
+          </div>
+        </div>
+      </div>
+    </div>{% endfor %}
+    <!-- end Drink Menu Page -->
+  </div>
+{% endblock %}
+

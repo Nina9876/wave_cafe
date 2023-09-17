@@ -1,0 +1,34 @@
+{% extends "cafe/base.html" %}
+{% load static %}
+
+{% block title %}About us{% endblock %}
+
+{% block content %}
+<!-- About Us Page -->
+  <div id="about" class="tm-page-content">{% for a in articles %}
+    {% if a.number|divisibleby:2 %}
+    <div class="tm-black-bg tm-mb-20 tm-about-box-2">
+      <div class="tm-list-item tm-list-item-2">
+        <div class="tm-list-item-text-2">
+          <h2 class="tm-text-primary">{{ a.name }}</h2>
+          {{ a.description }}
+        </div>
+        <img src="{{ a.image.url }}" alt="Image" class="tm-list-item-img tm-list-item-img-big tm-img-right">
+      </div>
+    </div>
+    {% else %}
+    <div class="tm-black-bg tm-mb-20 tm-about-box-1">
+      <h2 class="tm-text-primary tm-about-header">{{ a.name }}</h2>
+      <div class="tm-list-item tm-list-item-2">
+        <img src="{{ a.image.url }}" alt="Image" class="tm-list-item-img tm-list-item-img-big">
+        <div class="tm-list-item-text-2">
+           {{ a.description|linebreaks }}
+        </div>
+      </div>
+    </div>
+    {% endif %}
+    {% endfor %}
+  </div>
+{% endblock %}
+          <!-- end About Us Page -->
+

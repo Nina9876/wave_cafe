@@ -1,0 +1,21 @@
+{% extends "cafe/base.html" %}
+{% load static %}
+
+{% block title %}Special Items{% endblock %}
+
+{% block content %}
+<!-- Special Items Page -->
+  <div id="special" class="tm-page-content">
+    <div class="tm-special-items">{% for s in special %}
+      <div class="tm-black-bg tm-special-item">
+        <img src="{{ s.image.url }}" alt="Image">
+        <div class="tm-special-item-description">
+          <h2 class="tm-text-primary tm-special-item-title">{{ s.name }}</h2>
+          <p class="tm-special-item-text">{{ s.description }}</p><h3><span class="tm-list-item-price">{{ s.price }}p.</span></h3>
+        </div>
+      </div>{% endfor %}
+    </div>
+  </div>
+{% endblock %}
+          <!-- end Special Items Page -->
+

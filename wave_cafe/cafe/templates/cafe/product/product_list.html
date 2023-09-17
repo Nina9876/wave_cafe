@@ -1,0 +1,93 @@
+{% extends "cafe/base.html" %}
+{% load static %}
+
+{% block title %}
+  {% if category %}{{ category.name }}{% else %}Wave cafe{% endif %}
+{% endblock %}
+
+{% block content %}
+  <div id="drink" class="tm-page-content">
+    <!-- Drink Menu Page -->
+    <nav class="tm-black-bg tm-drinks-nav">
+      <ul>{% for c in categories %}
+        <li {% if category.slug == c.slug %} class="tm-tab-link active" {% endif %}>
+          <a href="{{ c.get_absolute_url }}">{{ c.name }}</a></li>
+        {% endfor %}
+      </ul>
+    </nav></nav>
+    {% for product in products %}
+    <div id="hot" class="tm-tab-content">
+      <div class="tm-list">
+        <div class="tm-list-item">
+          <img src="{{ product.image.url }}" alt="Image" class="tm-list-item-img">
+          <div class="tm-black-bg tm-list-item-text">
+            <h3 class="tm-list-item-name">{{ product.name }}<span class="tm-list-item-price">{{ product.price }}p.</span></h3>
+            <p class="tm-list-item-description">{{ product.description }}</p>
+          </div>
+        </div>
+      </div>
+    </div>{% endfor %}
+    <!-- end Drink Menu Page -->
+  </div>
+<div id="about" class="tm-page-content">{% for a in articles %}
+    {% if a.number|divisibleby:2 %}
+    <div class="tm-black-bg tm-mb-20 tm-about-box-2">
+      <div class="tm-list-item tm-list-item-2">
+        <div class="tm-list-item-text-2">
+          <h2 class="tm-text-primary">{{ a.name }}</h2>
+          {{ a.description }}
+        </div>
+        <img src="{{ a.image.url }}" alt="Image" class="tm-list-item-img tm-list-item-img-big tm-img-right">
+      </div>
+    </div>
+    {% else %}
+    <div class="tm-black-bg tm-mb-20 tm-about-box-1">
+      <h2 class="tm-text-primary tm-about-header">{{ a.name }}</h2>
+      <div class="tm-list-item tm-list-item-2">
+        <img src="{{ a.image.url }}" alt="Image" class="tm-list-item-img tm-list-item-img-big">
+        <div class="tm-list-item-text-2">
+           {{ a.description|linebreaks }}
+        </div>
+      </div>
+    </div>
+    {% endif %}
+    {% endfor %}
+  </div>
+<div id="special" class="tm-page-content">
+    <div class="tm-special-items">{% for s in special %}
+      <div class="tm-black-bg tm-special-item">
+        <img src="{{ s.image.url }}" alt="Image">
+        <div class="tm-special-item-description">
+          <h2 class="tm-text-primary tm-special-item-title">{{ s.name }}</h2>
+          <p class="tm-special-item-text">{{ s.description }}</p><h3><span class="tm-list-item-price">{{ s.price }}p.</span></h3>
+        </div>
+      </div>{% endfor %}
+    </div>
+  </div>
+<div id="contact" class="tm-page-content">{% for c in contact %}
+    <div class="tm-black-bg tm-contact-text-container">
+      <h2 class="tm-text-primary">{{ c.name }}</h2>
+      <p>{{ c.description|linebreaks }}</p>
+    </div>{% endfor %}
+    <div class="tm-black-bg tm-contact-form-container tm-align-right">
+      <form action="" method="POST" id="contact-form">
+        <div class="tm-form-group">
+          <input type="text" name="name" class="tm-form-control" placeholder="Имя" required="" />
+        </div>
+        <div class="tm-form-group">
+          <input type="email" name="email" class="tm-form-control" placeholder="Email" required="" />
+        </div>
+        <div class="tm-form-group tm-mb-30">
+          <textarea rows="6" name="message" class="tm-form-control" placeholder="Ваше сообщение" required=""></textarea>
+        </div>
+        <div>
+          {% csrf_token %}
+          <button type="submit" class="tm-btn-primary tm-align-right">
+            Отправить
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+{% endblock %}
+
